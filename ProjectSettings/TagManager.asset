@@ -9,6 +9,8 @@ TagManager:
   - DamageFloor
   - ShieldFloor
   - HealFloor
+  - Ennemy
+  - item
   layers:
   - Default
   - TransparentFX
@@ -51,4 +53,13 @@ TagManager:
     locked: 0
   - name: wall
     uniqueID: 2338073235
+    locked: 0
+  - name: ennemy
+    uniqueID: 924184737
+    locked: 0
+  - name: item
+    uniqueID: 2763368789
+    locked: 0
+  - name: Player
+    uniqueID: 549628461
     locked: 0
