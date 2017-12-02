@@ -10,12 +10,15 @@ public class CharacterController : MonoBehaviour
 	private Animator character_animator;
 	private Rigidbody2D character_body;
 	public int tileSize = 16;
+	public AudioSource attackSound;
+	public AudioClip quack;
 	
 	// Use this for initialization
 	void Start ()
 	{
 		this.character_body = this.GetComponent<Rigidbody2D>();
 		this.character_animator = this.GetComponent<Animator>();
+		attackSound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +52,9 @@ public class CharacterController : MonoBehaviour
 		}else if (Input.GetKeyDown(KeyCode.Space))
 		{
 			//attack
+			//Attack sound
+			attackSound.PlayOneShot(quack);
+			//Attack animation
 			character_animator.SetBool("Attack", true);
 		
 			
