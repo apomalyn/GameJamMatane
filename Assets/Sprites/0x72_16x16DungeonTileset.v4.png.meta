@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e92b81314e58344fd8d394e41d8277e0
-timeCreated: 1512181086
+timeCreated: 1512183135
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -1475,6 +1475,20 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 0x72_16x16DungeonTileset.v4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

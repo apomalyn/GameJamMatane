@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - floor
+  - wall
+  - DamageFloor
+  - ShieldFloor
+  - HealFloor
   layers:
   - Default
   - TransparentFX
@@ -40,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: floor
+    uniqueID: 344794843
+    locked: 0
+  - name: wall
+    uniqueID: 2338073235
     locked: 0
