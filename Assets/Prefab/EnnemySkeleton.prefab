@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61237882081194438}
   - component: {fileID: 212367206282248540}
   - component: {fileID: 95016385803211058}
+  - component: {fileID: 114875366975821146}
   m_Layer: 0
   m_Name: EnnemySkeleton
   m_TagString: Ennemy
@@ -105,6 +106,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114875366975821146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411284752366674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13aaa46a72cab9f438f43dc55df196e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 3
 --- !u!212 &212367206282248540
 SpriteRenderer:
   m_ObjectHideFlags: 1

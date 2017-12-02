@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50749219404819858}
   - component: {fileID: 61412503730070432}
   - component: {fileID: 95577260652332144}
+  - component: {fileID: 114122955134132112}
   m_Layer: 0
   m_Name: EnnemyMage
   m_TagString: Ennemy
@@ -86,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
 --- !u!95 &95577260652332144
 Animator:
@@ -105,6 +106,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114122955134132112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457432092213124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13aaa46a72cab9f438f43dc55df196e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 2
 --- !u!212 &212950059643075966
 SpriteRenderer:
   m_ObjectHideFlags: 1
