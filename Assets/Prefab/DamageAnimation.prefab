@@ -9,43 +9,61 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1475491768512194}
+  m_RootGameObject: {fileID: 1576576310069912}
   m_IsPrefabParent: 1
---- !u!1 &1475491768512194
+--- !u!1 &1576576310069912
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4512374020118560}
-  - component: {fileID: 212571610905591842}
+  - component: {fileID: 4614321198542334}
+  - component: {fileID: 212363996572776406}
+  - component: {fileID: 95724063531478826}
   m_Layer: 0
-  m_Name: PotionDammage
-  m_TagString: item
+  m_Name: DamageAnimation
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4512374020118560
+--- !u!4 &4614321198542334
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1475491768512194}
+  m_GameObject: {fileID: 1576576310069912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.106898, y: -1.2618157, z: 0}
+  m_LocalPosition: {x: -0.228, y: 0.14528039, z: -0.023196924}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &212571610905591842
+--- !u!95 &95724063531478826
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576576310069912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 478773b54a92f72448d3468d66613ebe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &212363996572776406
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1475491768512194}
+  m_GameObject: {fileID: 1576576310069912}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: -1531598507
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300388, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55f2e7865e8846043a0aa800cb9cdda0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
