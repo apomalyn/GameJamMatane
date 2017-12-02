@@ -27,11 +27,11 @@ public class CharacterController : MonoBehaviour
 		character_animator.SetBool("Attack", false);
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 5*Time.deltaTime );
+			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 0.01f );
 			//move vers le haut
 		}else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-tileSize, character_body.transform.localPosition.z), 5*Time.deltaTime );
+			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-tileSize, character_body.transform.localPosition.z), 0.01f );
 			//move vers le bas
 		}else if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
@@ -39,7 +39,7 @@ public class CharacterController : MonoBehaviour
 			{
 				flip();
 			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 5*Time.deltaTime );
+			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
 			//move vers la droite
 		}else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
@@ -47,7 +47,7 @@ public class CharacterController : MonoBehaviour
 			{
 				flip();
 			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 5*Time.deltaTime );
+			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
 			//move vers la gauche
 		}else if (Input.GetKeyDown(KeyCode.Space))
 		{
