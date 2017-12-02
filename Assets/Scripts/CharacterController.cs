@@ -20,6 +20,8 @@ public class CharacterController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		
+		character_animator.SetBool("Attack", false);
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 5*Time.deltaTime );
@@ -30,12 +32,34 @@ public class CharacterController : MonoBehaviour
 			//move vers le bas
 		}else if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
+			if (!toright)
+			{
+				flip();
+			}
 			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 5*Time.deltaTime );
 			//move vers la droite
 		}else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
+			if (toright)
+			{
+				flip();
+			}
 			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 5*Time.deltaTime );
 			//move vers la gauche
+		}else if (Input.GetKeyDown(KeyCode.Space))
+		{
+			//attack
+			character_animator.SetBool("Attack", true);
+		
+			
 		}
+	}
+
+	void flip()
+	{
+		toright = !toright;
+		Vector3 scale = this.transform.localScale;
+		scale.x *= -1;
+		this.transform.localScale = scale;
 	}
 }
