@@ -15,14 +15,4 @@ public class GameManager : MonoBehaviour{
 
 	private void InitGame(){
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
