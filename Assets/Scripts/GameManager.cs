@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour{
 	}
 
 	private void InitGame(){
-		boardManager.setupScene(level);
 	}
 
 	// Use this for initialization
