@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour{
         character_body = this.GetComponent<Rigidbody2D>();
         character_animator = this.GetComponent<Animator>();
         attackSound = GetComponent<AudioSource>();
-        this.takeDamage();
+       
     }
 
     // Update is called once per frame
