@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Security.Cryptography.X509Certificates;
-using Random = UnityEngine.Random;
+﻿using Random = UnityEngine.Random;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour{
     public enum TileType{
         Floor,
-        Side,
-        TopOuter,
-        BottomOuter,
+        Stair,
         None
     }
 
@@ -30,6 +24,7 @@ public class BoardManager : MonoBehaviour{
     public GameObject[] powerUpTilesTop;
     public GameObject[] powerUpTilesBottom;
     public GameObject wallSideTile;
+    public GameObject stairTile;
 
     public GameObject[] enemies; //An array who contains different enemies
     public GameObject player;
@@ -59,7 +54,7 @@ public class BoardManager : MonoBehaviour{
     }
 
 
-    void SetupTilesArray(){
+    private void SetupTilesArray(){
         // Set the tiles jagged array to the correct width.
         tiles = new TileType[columns+1][];
 
@@ -74,7 +69,7 @@ public class BoardManager : MonoBehaviour{
     }
 
 
-    void CreateRoomsAndCorridors(){
+    private void CreateRoomsAndCorridors(){
         // Create the rooms array with a random size.
         rooms = new Room[numRooms.Random];
 
@@ -90,7 +85,7 @@ public class BoardManager : MonoBehaviour{
 
         // Setup the first corridor using the first room.
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
-
+        
         for (int i = 1; i < rooms.Length; i++){
             // Create a room.
             rooms[i] = new Room();
@@ -112,30 +107,61 @@ public class BoardManager : MonoBehaviour{
                 //Instantiate(player, playerPos, Quaternion.identity);
             }
         }
+
+        Room staircaseRoom = rooms[Random.Range(0, rooms.Length)];
+        
+        int xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
+        int yStaircase = staircaseRoom.yPos;
+        
+        bool available = false;
+
+        while (!available){
+            xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
+            yStaircase = staircaseRoom.yPos;
+
+            available = true;
+          
+            for (int j = 0; j < corridors.Length; j++){
+                print(corridors[j].startXPos);
+                print(corridors[j].startYPos);
+                if (corridors[j].startXPos == xStaircase || corridors[j].EndPositionX == xStaircase
+                    || corridors[j].startYPos == yStaircase || corridors[j].EndPositionY == yStaircase){
+                    available = false;
+                }
+            } 
+        }
+
+        tiles[xStaircase][yStaircase] = TileType.Stair;
+        tiles[xStaircase][yStaircase + 1] = TileType.Stair;
+        tiles[xStaircase + 1][yStaircase] = TileType.Stair;
+        tiles[xStaircase + 1][yStaircase + 1] = TileType.Stair;        
+        
+        GameObject stair = Instantiate(stairTile, new Vector3((xStaircase + 1) * sizeTile, (yStaircase + 1) * sizeTile, 0f), Quaternion.identity);
+        stair.transform.parent = boardHolder.transform;
+
     }
 
 
-    void SetTilesValuesForRooms(){
-        // Go through all the rooms...
+    private void SetTilesValuesForRooms(){
         for (int i = 0; i < rooms.Length; i++){
             Room currentRoom = rooms[i];
 
-            // ... and for each room go through it's width.
             for (int j = 0; j < currentRoom.roomWidth; j++){
                 int xCoord = currentRoom.xPos + j;
 
                 // For each horizontal tile, go up vertically through the room's height.
                 for (int k = 0; k < currentRoom.roomHeight; k++){
                     int yCoord = currentRoom.yPos + k;
-
-                    tiles[xCoord][yCoord] = TileType.Floor;
+    
+                    if(tiles[xCoord][yCoord] == TileType.None)
+                        tiles[xCoord][yCoord] = TileType.Floor;
                 }
             }
         }
     }
 
 
-    void SetTilesValuesForCorridors(){
+    private void SetTilesValuesForCorridors(){
         // Go through every corridor...
         for (int i = 0; i < corridors.Length; i++){
             Corridor currentCorridor = corridors[i];
@@ -170,7 +196,7 @@ public class BoardManager : MonoBehaviour{
     }
 
 
-    void InstantiateTiles(){
+    private void InstantiateTiles(){
         bool draw;
         // Go through all the tiles in the jagged array...
         for (int i = 0; i < tiles.Length; i++){
@@ -206,7 +232,7 @@ public class BoardManager : MonoBehaviour{
         }
     }
 
-    void InstantiateEnemy(){
+    private void InstantiateEnemy(){
         int widthCurrentRoom;
         int heightCurrentRoom;
 
@@ -215,8 +241,6 @@ public class BoardManager : MonoBehaviour{
         int randomIndex;
 
         GameObject enemy;
-
-        float halfSizeTile = sizeTile / 2;
         Vector3 position;
         
         foreach (Room room in rooms){
@@ -240,7 +264,7 @@ public class BoardManager : MonoBehaviour{
         }
     }
 
-    void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord){
+    private void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord){
         // Create a random index for the array.
         int randomIndex = Random.Range(0, prefabs.Length);
 
@@ -254,7 +278,7 @@ public class BoardManager : MonoBehaviour{
         tileInstance.transform.parent = boardHolder.transform;
     }
 
-    void instantiateTopTile(float xCoord, float yCoord){
+    private void instantiateTopTile(float xCoord, float yCoord){
         int tileSpe = Random.Range(0, 100);
         int randomIndex;
         Vector3 position;
