@@ -114,8 +114,9 @@ public class BoardManager : MonoBehaviour{
         int yStaircase = staircaseRoom.yPos;
         
         bool available = false;
+        int nbTry = 0;
 
-        while (!available){
+        while (!available && nbTry < 5){
             xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
             yStaircase = staircaseRoom.yPos;
 
@@ -128,7 +129,9 @@ public class BoardManager : MonoBehaviour{
                     || corridors[j].startYPos == yStaircase || corridors[j].EndPositionY == yStaircase){
                     available = false;
                 }
-            } 
+            }
+
+            nbTry++;
         }
 
         tiles[xStaircase][yStaircase] = TileType.Stair;
