@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea6ccbc11f673d499e3289ef7076218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRatePowerUp: 2
   columns: 100
   rows: 100
   numRooms:
