@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour{
     private Corridor[] corridors; // All the corridors that connect the rooms.
     private GameObject boardHolder; // GameObject that acts as a container for all other tiles.
 
-    private float sizeTile = 0.16f;
+    private float sizeTile = 0.1600f;
 
     private void Start(){
         // Create the board holder.
@@ -120,7 +120,6 @@ public class BoardManager : MonoBehaviour{
                 for (int k = 0; k < currentRoom.roomHeight; k++){
                     int yCoord = currentRoom.yPos + k;
 
-                    // The coordinates in the jagged array are based on the room's position and it's width and height.
                     tiles[xCoord][yCoord] = TileType.Floor;
                 }
             }

@@ -139,20 +139,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea6ccbc11f673d499e3289ef7076218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 8
-  rows: 8
-  wallCount:
-    mini: 5
-    max: 9
-  specialCount:
-    mini: 3
-    max: 7
-  exit: {fileID: 1005300203681332, guid: f93cf63c63ff54c4fab6776b2cf3e6eb, type: 2}
-  floorTiles: []
-  wallTiles: []
-  specialTiles: []
-  ennemyTiles: []
-  outerWallTiles: []
+  columns: 100
+  rows: 100
+  numRooms:
+    m_Min: 15
+    m_Max: 20
+  roomWidth:
+    m_Min: 3
+    m_Max: 10
+  roomHeight:
+    m_Min: 3
+    m_Max: 10
+  corridorLength:
+    m_Min: 6
+    m_Max: 10
+  floorTiles:
+  - {fileID: 1785017605956080, guid: 6a362601cc0914ff4bb1d8e52217d905, type: 2}
+  outerWallTilesTop:
+  - {fileID: 1525816313727814, guid: ef138a50c6bf24d79af24d5b6b44c03b, type: 2}
+  - {fileID: 1612104443909124, guid: 6ce573684efd74279a5b0a3ecce35c88, type: 2}
+  - {fileID: 1063225944660468, guid: 12ad2ab82e850467ebbc345a1a52c245, type: 2}
+  - {fileID: 1716596984463610, guid: ee880f1914cbe4e52a85f87934656f22, type: 2}
+  - {fileID: 1080738254180708, guid: 7ffd6249d1903475c93a9ff46b876c67, type: 2}
+  outerWallTilesBottom:
+  - {fileID: 1589661583170558, guid: 1fa588e034f1c0d44a1bea7b5abb0f22, type: 2}
+  - {fileID: 1552562073828160, guid: b0c4f84ad3b8e384d87682285c59dfb2, type: 2}
+  - {fileID: 1867007375643418, guid: d81621fbd8a38fd419f1f05b98552ad9, type: 2}
+  powerUpTilesTop:
+  - {fileID: 1682195306001726, guid: 522bc4e071b5a41c7be81ecd43712cae, type: 2}
+  - {fileID: 1439807007089980, guid: 549ed649b1808452d9f63a497ef97256, type: 2}
+  - {fileID: 1699458768453150, guid: 32476ea068b384437aa1b877cb890897, type: 2}
+  powerUpTilesBottom:
+  - {fileID: 1121486992211914, guid: 6449bbbd986434e889f13d070464dfdd, type: 2}
+  - {fileID: 1251985230143486, guid: c57372d89a653469aa769a291b06f55d, type: 2}
+  - {fileID: 1977598524568878, guid: 08b3b43550cd845a2bfeaa02b601244c, type: 2}
+  wallSideTile: {fileID: 1408467665424212, guid: c22ee34fe33354095b953d2d06ce8ce8,
+    type: 2}
+  player: {fileID: 0}
 --- !u!4 &404641878
 Transform:
   m_ObjectHideFlags: 0
@@ -160,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 404641875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.80813, y: 0.35605413, z: 0.092163086}
+  m_LocalPosition: {x: -7.98, y: -4.18, z: 0.092163086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -207,7 +230,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
