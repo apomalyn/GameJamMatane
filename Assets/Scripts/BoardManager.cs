@@ -7,6 +7,8 @@ public class BoardManager : MonoBehaviour{
         Stair,
         None
     }
+
+    public static BoardManager instance;
     
     private const int STAIR_HEIGHT = 3;
     private const int STAIR_WIDTH = 2;
@@ -43,6 +45,10 @@ public class BoardManager : MonoBehaviour{
 
     private float sizeTile = 0.1600f;
 
+    private void Awake(){
+        instance = this;
+    }
+
     public void nextLevel(){
         player = GameObject.Find("Character");
         
@@ -61,6 +67,9 @@ public class BoardManager : MonoBehaviour{
 
         InstantiateTiles();
         InstantiateEnemy();
+
+        GameObject.Find("Main Camera").transform.position = player.transform.position;
+        //GameObject.Find("Main Camera").GetComponent<CameraController>().setOffset();
     }
 
 
@@ -154,8 +163,10 @@ public class BoardManager : MonoBehaviour{
             CreateRoomsAndCorridors();
         }else{
             for (int i = 0; i < STAIR_WIDTH; i++){
-                tiles[xStaircase][yStaircase] = TileType.Stair;
-                tiles[xStaircase - i][yStaircase - 1] = TileType.Stair;
+                if (xStaircase - i >= 0 && yStaircase - 1 >= 0){
+                    tiles[xStaircase][yStaircase] = TileType.Stair;
+                    tiles[xStaircase - i][yStaircase - 1] = TileType.Stair;   
+                }
             }
             Debug.Log("Stair start at: " + xStaircase + ":" + yStaircase);
             GameObject stair = Instantiate(stairTile, new Vector3((xStaircase - (STAIR_HEIGHT / 2)) * sizeTile - 0.005f, (yStaircase) * sizeTile - 0.01f, 0f), Quaternion.identity);

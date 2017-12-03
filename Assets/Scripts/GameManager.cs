@@ -6,14 +6,18 @@ public class GameManager : MonoBehaviour{
 
 	private BoardManager boardManager;
 
+	private GameObject camera;
+
 	private int levelCurrent = 0;
 	
 	private void Awake(){
-		boardManager = GetComponent<BoardManager>();
+		boardManager = BoardManager.instance;
 		InitGame();
 	}
 
 	private void InitGame(){
 		boardManager.nextLevel();
 	}
+	
+	
 }
