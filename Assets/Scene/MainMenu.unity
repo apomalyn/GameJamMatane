@@ -1340,6 +1340,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114369403988230064, guid: 6a334b45ca9148c40933f32b33f39781, type: 2}
+    - {fileID: 61812037704179212, guid: 6a334b45ca9148c40933f32b33f39781, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 6a334b45ca9148c40933f32b33f39781, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1873439132 stripped
@@ -1360,3 +1361,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSound: {fileID: 0}
   quack: {fileID: 8300000, guid: 2bce6294fb5424f4b8de7b933c91f734, type: 3}
+--- !u!58 &1873439137
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873439132}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.08
