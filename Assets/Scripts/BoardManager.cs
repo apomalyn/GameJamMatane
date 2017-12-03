@@ -23,6 +23,7 @@ public class BoardManager : MonoBehaviour{
     public GameObject[] floorTiles; // An array of wall tile prefabs.
     public GameObject[] outerWallTilesTop; // An array of outer wall tile prefabs.
     public GameObject[] outerWallTilesBottom; // An array of outer wall tile prefabs.
+    public GameObject[] floorUnderWallTiles;
     public GameObject[] powerUpTilesTop;
     public GameObject[] powerUpTilesBottom;
     public GameObject wallSideTile;
@@ -181,7 +182,8 @@ public class BoardManager : MonoBehaviour{
                     }
 
                     if ((j + 1) <= rows && tiles[i][j + 1] == TileType.None){
-                        draw = instantiateTopTile(i, j + 1);
+                        instantiateTopTile(i, j + 1);
+                        draw = false;
                     }
                     
                     if ((j - 1) >= 0 && tiles[i][j - 1] == TileType.None){
@@ -197,52 +199,6 @@ public class BoardManager : MonoBehaviour{
         }
     }
 
-
-    void InstantiateOuterWalls(){
-        // The outer walls are one unit left, right, up and down from the board.
-        float leftEdgeX = -1f;
-        float rightEdgeX = columns + 0f;
-        float bottomEdgeY = -1f;
-        float topEdgeY = rows + 0f;
-
-        // Instantiate both vertical walls (one on each side).
-        InstantiateVerticalOuterWall(leftEdgeX, bottomEdgeY, topEdgeY);
-        InstantiateVerticalOuterWall(rightEdgeX, bottomEdgeY, topEdgeY);
-
-        // Instantiate both horizontal walls, these are one in left and right from the outer walls.
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, bottomEdgeY);
-        InstantiateHorizontalOuterWall(leftEdgeX + 1f, rightEdgeX - 1f, topEdgeY);
-    }
-
-
-    void InstantiateVerticalOuterWall(float xCoord, float startingY, float endingY){
-        // Start the loop at the starting value for Y.
-        float currentY = startingY;
-
-        // While the value for Y is less than the end value...
-        while (currentY <= endingY){
-            // ... instantiate an outer wall tile at the x coordinate and the current y coordinate.
-            InstantiateFromArray(outerWallTilesTop, xCoord, currentY);
-
-            currentY++;
-        }
-    }
-
-
-    void InstantiateHorizontalOuterWall(float startingX, float endingX, float yCoord){
-        // Start the loop at the starting value for X.
-        float currentX = startingX;
-
-        // While the value for X is less than the end value...
-        while (currentX <= endingX){
-            // ... instantiate an outer wall tile at the y coordinate and the current x coordinate.
-            InstantiateFromArray(outerWallTilesTop, currentX, yCoord);
-
-            currentX++;
-        }
-    }
-
-
     void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord){
         // Create a random index for the array.
         int randomIndex = Random.Range(0, prefabs.Length);
@@ -257,7 +213,7 @@ public class BoardManager : MonoBehaviour{
         tileInstance.transform.parent = boardHolder.transform;
     }
 
-    bool instantiateTopTile(float xCoord, float yCoord){
+    void instantiateTopTile(float xCoord, float yCoord){
         int tileSpe = Random.Range(0, 100);
         int randomIndex;
         Vector3 position;
@@ -271,16 +227,18 @@ public class BoardManager : MonoBehaviour{
             
             position = new Vector3(xCoord * sizeTile, (yCoord-1) * sizeTile, 0f);
             tileInstance = Instantiate(powerUpTilesBottom[randomIndex], position, Quaternion.identity);
-            tiles[(int)xCoord][(int)yCoord] = TileType.None;
-
         } else{
+            
             position = new Vector3(xCoord * sizeTile, yCoord * sizeTile, 0f);
             randomIndex = Random.Range(0, outerWallTilesTop.Length);
             tileInstance = Instantiate(outerWallTilesTop[randomIndex], position, Quaternion.identity);
+            tileInstance.transform.parent = boardHolder.transform;
+            
+            randomIndex = Random.Range(0, floorUnderWallTiles.Length);
+            position = new Vector3(xCoord * sizeTile, (yCoord-1) * sizeTile, 0f);
+            tileInstance = Instantiate(floorUnderWallTiles[randomIndex], position, Quaternion.identity);
         }
 
         tileInstance.transform.parent = boardHolder.transform;
-
-        return (tileSpe > 2);
     }
 }

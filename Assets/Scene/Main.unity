@@ -165,6 +165,10 @@ MonoBehaviour:
   - {fileID: 1589661583170558, guid: 1fa588e034f1c0d44a1bea7b5abb0f22, type: 2}
   - {fileID: 1552562073828160, guid: b0c4f84ad3b8e384d87682285c59dfb2, type: 2}
   - {fileID: 1867007375643418, guid: d81621fbd8a38fd419f1f05b98552ad9, type: 2}
+  floorUnderWallTiles:
+  - {fileID: 1751217257783608, guid: bf34dbff781fa4d1ba2a9720e9b652bc, type: 2}
+  - {fileID: 1410774621598542, guid: 8ee6d41ead91740eb94543cd25a84c12, type: 2}
+  - {fileID: 1643076024567316, guid: 75672d31b023c448eb459dc37430336a, type: 2}
   powerUpTilesTop:
   - {fileID: 1682195306001726, guid: 522bc4e071b5a41c7be81ecd43712cae, type: 2}
   - {fileID: 1439807007089980, guid: 549ed649b1808452d9f63a497ef97256, type: 2}
