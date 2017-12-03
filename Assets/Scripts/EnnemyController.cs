@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class EnnemyController : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class EnnemyController : MonoBehaviour
 	private int restMove = 0;
 	private int indexCurrentMove = 0;
 
+	public Transform target;
+	public float posTargetx;
+	public float posTargety;
+	private BoardManager.TileType [][] tiles;
+	private bool targetOk = false;
+	private int[,] open;
+	private int[,] close;
+	
 	public bool go = true;
 	
 	public EnemyType type;
@@ -52,7 +61,7 @@ public class EnnemyController : MonoBehaviour
 	void Start ()
 	{
 		ennemy_body = GetComponent<Rigidbody2D>();
-	
+		tiles = BoardManager.instance.getTilesGrid();
 	}
 	
 	// Update is called once per frame
@@ -73,53 +82,63 @@ public class EnnemyController : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.gameObject.tag == "Player") 
-		{	
-			life -= 1;
-			if (life <= 0) 
-			{
-				destroy();
-			}
+		if (collider.gameObject.tag == "Player")
+		{
+			targetOk = true;
 		}
 	}
 
 	void deplacement()
 	{
-		Vector3 position = new Vector3();
-
-		if (restMove == 0)
+		if (targetOk)
 		{
-			indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
-			while (pattern[(int) type, indexCurrentMove] == 0){
+			posTargetx = target.gameObject.transform.position.x;
+			posTargety = target.gameObject.transform.position.y;
+			posTargetx = Mathf.Round(posTargetx / .1600f);
+			posTargety = Mathf.Round(posTargety / .1600f);
+			float posx = Mathf.Round(gameObject.transform.position.x / 0.1600f);
+			float posy = Mathf.Round(gameObject.transform.position.y / 0.1600f);
+
+		}
+		else{
+			Vector3 position = new Vector3();
+
+			if (restMove == 0)
+			{
 				indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
+				while (pattern[(int) type, indexCurrentMove] == 0)
+				{
+					indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
+				}
+				restMove = pattern[(int) type, indexCurrentMove];
 			}
-			restMove = pattern[(int) type, indexCurrentMove];
-		}
 
-		switch (directionPattern[(int) type, indexCurrentMove])
-		{
-			case Direction.Up:
-				//Translate
-				position = new Vector3(0, 0.1600f, 0);
-				break;
-			case Direction.Down:
-				//Translate
-				position = new Vector3(0, -0.1600f, 0);
-				break;
-			case Direction.Left:
+			switch (directionPattern[(int) type, indexCurrentMove])
+			{
+				case Direction.Up:
+					//Translate
+					position = new Vector3(0, 0.1600f, 0);
+					break;
+				case Direction.Down:
+					//Translate
+					position = new Vector3(0, -0.1600f, 0);
+					break;
+				case Direction.Left:
 
-				//Translate
-				position = new Vector3(-0.1600f, 0, 0);
-				break;
-			case Direction.Right:
-				position = new Vector3(0.1600f, 0, 0);
-				break;
+					//Translate
+					position = new Vector3(-0.1600f, 0, 0);
+					break;
+				case Direction.Right:
+					position = new Vector3(0.1600f, 0, 0);
+					break;
+			}
+			if (position != new Vector3())
+			{
+				ennemy_body.transform.Translate(position, Space.World);
+				restMove--;
+			}
 		}
-		if (position != new Vector3()){
-			ennemy_body.transform.Translate(position, Space.World);
-			restMove--;
-		}
-}
+	}
 
 	void destroy()
 	{

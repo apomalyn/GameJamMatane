@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229834916287964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.55, y: 0.105, z: -0.017578125}
+  m_LocalPosition: {x: 26.152925, y: 43.027718, z: -0.017578125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!95 &95780780130092962
 Animator:
@@ -118,8 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSize: 0.16
-  pathPoint: []
-  life: 1
+  target: {fileID: 0}
+  posTargetx: 0
+  posTargety: 0
+  go: 1
+  type: 0
 --- !u!212 &212425869211917962
 SpriteRenderer:
   m_ObjectHideFlags: 1
