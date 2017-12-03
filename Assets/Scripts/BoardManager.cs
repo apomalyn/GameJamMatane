@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class BoardManager : MonoBehaviour{
     public IntRange roomWidth = new IntRange(3, 10); // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10); // The range of heights rooms can have.
     public IntRange corridorLength = new IntRange(6, 10); // The range of lengths corridors between rooms can have.
+    public IntRange numberEnemyByRoom = new IntRange(10, 40); // The range of enemies number.
+    
     public GameObject[] floorTiles; // An array of wall tile prefabs.
     public GameObject[] outerWallTilesTop; // An array of outer wall tile prefabs.
     public GameObject[] outerWallTilesBottom; // An array of outer wall tile prefabs.
@@ -27,18 +30,22 @@ public class BoardManager : MonoBehaviour{
     public GameObject[] powerUpTilesTop;
     public GameObject[] powerUpTilesBottom;
     public GameObject wallSideTile;
+
+    public GameObject[] enemies; //An array who contains different enemies
     public GameObject player;
 
     private TileType[][] tiles; // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms; // All the rooms that are created for this board.
     private Corridor[] corridors; // All the corridors that connect the rooms.
     private GameObject boardHolder; // GameObject that acts as a container for all other tiles.
+    private GameObject enemiesHolder; // GameObject that acts as a container for all other enemies.
 
     private float sizeTile = 0.1600f;
 
     private void Start(){
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
+        enemiesHolder = new GameObject("EnemisHolder");
 
         SetupTilesArray();
 
@@ -48,7 +55,7 @@ public class BoardManager : MonoBehaviour{
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        //InstantiateOuterWalls();
+        InstantiateEnemy();
     }
 
 
@@ -79,7 +86,7 @@ public class BoardManager : MonoBehaviour{
         corridors[0] = new Corridor();
 
         // Setup the first room, there is no previous corridor so we do not use one.
-        rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows);
+        rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows, numberEnemyByRoom);
 
         // Setup the first corridor using the first room.
         corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
@@ -89,7 +96,7 @@ public class BoardManager : MonoBehaviour{
             rooms[i] = new Room();
 
             // Setup the room based on the previous corridor.
-            rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1]);
+            rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1], numberEnemyByRoom);
 
             // If we haven't reached the end of the corridors array...
             if (i < corridors.Length){
@@ -195,6 +202,40 @@ public class BoardManager : MonoBehaviour{
                         InstantiateFromArray(floorTiles, i, j);
                     }
                 }
+            }
+        }
+    }
+
+    void InstantiateEnemy(){
+        int widthCurrentRoom;
+        int heightCurrentRoom;
+
+        int xCoordRandom;
+        int yCoordRandom;
+        int randomIndex;
+
+        GameObject enemy;
+
+        float halfSizeTile = sizeTile / 2;
+        Vector3 position;
+        
+        foreach (Room room in rooms){
+            widthCurrentRoom = room.roomWidth;
+            heightCurrentRoom = room.roomHeight;
+
+            for (int i = 0; i < room.nbEnemy; i++){
+                randomIndex = Random.Range(0, enemies.Length);
+                xCoordRandom = Random.Range(0, widthCurrentRoom);
+                yCoordRandom = Random.Range(0, heightCurrentRoom);
+                
+                position = new Vector3(
+                    (room.xPos + xCoordRandom) * sizeTile,
+                    (room.yPos + yCoordRandom) * sizeTile,
+                    0f
+                );
+
+                enemy = Instantiate(enemies[randomIndex], position, Quaternion.identity);
+                enemy.transform.parent = enemiesHolder.transform;
             }
         }
     }

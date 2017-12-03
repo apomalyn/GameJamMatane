@@ -7,14 +7,16 @@ public class Room
     public int roomWidth;                     // How many tiles wide the room is.
     public int roomHeight;                    // How many tiles high the room is.
     public Direction enteringCorridor;    // The direction of the corridor that is entering this room.
+    public int nbEnemy;                    // How many enemy in the room is
 
 
     // This is used for the first room.  It does not have a Corridor parameter since there are no corridors yet.
-    public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows)
+    public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows, IntRange rangeNumberEnemy)
     {
         // Set a random width and height.
         roomWidth = widthRange.Random;
         roomHeight = heightRange.Random;
+        nbEnemy = rangeNumberEnemy.Random;
 
         // Set the x and y coordinates so the room is roughly in the middle of the board.
         xPos = Mathf.RoundToInt(columns / 2f - roomWidth / 2f);
@@ -23,7 +25,7 @@ public class Room
 
 
     // This is an overload of the SetupRoom function and has a corridor parameter that represents the corridor entering the room.
-    public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor)
+    public void SetupRoom (IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor, IntRange rangeNumberEnemy)
     {
         // Set the entering corridor direction.
         enteringCorridor = corridor.direction;
@@ -31,6 +33,7 @@ public class Room
         // Set random values for width and height.
         roomWidth = widthRange.Random;
         roomHeight = heightRange.Random;
+        nbEnemy = rangeNumberEnemy.Random;
 
         switch (corridor.direction)
         {
