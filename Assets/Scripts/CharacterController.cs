@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour{
         character_body = this.GetComponent<Rigidbody2D>();
         character_animator = this.GetComponent<Animator>();
         attackSound = GetComponent<AudioSource>();
-       
+       takeDamage();
     }
 
     // Update is called once per frame
@@ -63,6 +63,9 @@ public class CharacterController : MonoBehaviour{
                 attackSound.PlayOneShot(quack);
                 //Attack animation
                 character_animator.SetBool("Attack", true);
+            }
+            if (Input.GetKeyDown(KeyCode.P)){
+                this.takeDamage();
             }
         }
     }
