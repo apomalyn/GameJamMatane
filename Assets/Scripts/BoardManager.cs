@@ -7,6 +7,10 @@ public class BoardManager : MonoBehaviour{
         Stair,
         None
     }
+    
+    private const int STAIR_SIZE = 2;
+    private const int SPAWN_RATE_TILE_SPE = 10;
+    public int spawnRatePowerUp = 2;
 
 
     public int columns = 100; // The number of columns on the board (how wide it will be).
@@ -107,42 +111,64 @@ public class BoardManager : MonoBehaviour{
                 Vector3 playerPos = new Vector3(rooms[i].xPos * sizeTile, rooms[i].yPos * sizeTile, 0);
                 //Instantiate(player, playerPos, Quaternion.identity);
             }
+            
+            
         }
-
-        Room staircaseRoom = rooms[Random.Range(0, rooms.Length)];
-        
-        int xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
-        int yStaircase = staircaseRoom.yPos;
         
         bool available = false;
+        int indexRoom = Random.Range(0, rooms.Length);
+        Room staircaseRoom = rooms[indexRoom];
+
+        int xStaircase = staircaseRoom.xPos + Random.Range(1, staircaseRoom.roomWidth);
+        int yStaircase = staircaseRoom.yPos;
+        
+        //to delete
         int nbTry = 0;
 
-        while (!available && nbTry < 5){
-            xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
-            yStaircase = staircaseRoom.yPos;
-
+                
+        while (!available && indexRoom != -1){
             available = true;
-          
+
             for (int j = 0; j < corridors.Length; j++){
-                print(corridors[j].startXPos);
-                print(corridors[j].startYPos);
                 if (corridors[j].startXPos == xStaircase || corridors[j].EndPositionX == xStaircase
                     || corridors[j].startYPos == yStaircase || corridors[j].EndPositionY == yStaircase){
                     available = false;
                 }
             }
 
-            nbTry++;
+            if (!available){
+                if (xStaircase + 1 < staircaseRoom.xPos + staircaseRoom.roomWidth){
+                    xStaircase++;
+                }
+                else{
+                    indexRoom = (indexRoom+1 < rooms.Length) ? indexRoom + 1: -1;
+                    if (indexRoom != -1){
+                        staircaseRoom = rooms[indexRoom];
+
+                        xStaircase = staircaseRoom.xPos + Random.Range(0, staircaseRoom.roomWidth);
+                        yStaircase = staircaseRoom.yPos;
+                    }
+                }
+            }
         }
 
-        tiles[xStaircase][yStaircase] = TileType.Stair;
-        tiles[xStaircase][yStaircase + 1] = TileType.Stair;
-        tiles[xStaircase + 1][yStaircase] = TileType.Stair;
-        tiles[xStaircase + 1][yStaircase + 1] = TileType.Stair;        
-        
-        GameObject stair = Instantiate(stairTile, new Vector3((xStaircase + 1) * sizeTile, (yStaircase + 1) * sizeTile, 0f), Quaternion.identity);
-        stair.transform.parent = boardHolder.transform;
+        if (indexRoom == -1){
+            print("stair is not at a good place, restart generation");
+            rooms = new Room[1];
+            corridors = new Corridor[1];
+            CreateRoomsAndCorridors();
+        }else{
+            print("Stair position: " + xStaircase + ":" + yStaircase);
+            print("Room stair start: " + staircaseRoom.xPos + ":" + staircaseRoom.yPos);
 
+            for (int i = 0; i < STAIR_SIZE; i++){
+                tiles[xStaircase][yStaircase] = TileType.Stair;
+                tiles[xStaircase - i][yStaircase - 1] = TileType.Stair;
+            }
+            
+            GameObject stair = Instantiate(stairTile, new Vector3((xStaircase - 1) * sizeTile - 0.005f, (yStaircase) * sizeTile - 0.01f, 0f), Quaternion.identity);
+            stair.transform.parent = boardHolder.transform;   
+        }
     }
 
 
@@ -288,7 +314,7 @@ public class BoardManager : MonoBehaviour{
         Vector3 position;
         GameObject tileInstance;
 
-        if (tileSpe < 2){
+        if (tileSpe < spawnRatePowerUp){
             position = new Vector3(xCoord * sizeTile, yCoord * sizeTile + 0.115f, 0f);
             randomIndex = Random.Range(0, powerUpTilesTop.Length);
             tileInstance = Instantiate(powerUpTilesTop[randomIndex], position, Quaternion.identity);
@@ -296,7 +322,7 @@ public class BoardManager : MonoBehaviour{
             
             position = new Vector3(xCoord * sizeTile, (yCoord-1) * sizeTile, 0f);
             tileInstance = Instantiate(powerUpTilesBottom[randomIndex], position, Quaternion.identity);
-        } else if (tileSpe < 10){
+        } else if (tileSpe < SPAWN_RATE_TILE_SPE){
             position = new Vector3(xCoord * sizeTile, yCoord * sizeTile, 0f);
             randomIndex = Random.Range(0, outerWallTilesSpe.Length);
             tileInstance = Instantiate(outerWallTilesSpe[randomIndex], position, Quaternion.identity);

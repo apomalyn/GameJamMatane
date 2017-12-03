@@ -145,14 +145,14 @@ MonoBehaviour:
     m_Min: 15
     m_Max: 20
   roomWidth:
-    m_Min: 3
+    m_Min: 4
     m_Max: 10
   roomHeight:
-    m_Min: 3
+    m_Min: 4
     m_Max: 10
   corridorLength:
-    m_Min: 6
-    m_Max: 10
+    m_Min: 4
+    m_Max: 6
   numberEnemyByRoom:
     m_Min: 0
     m_Max: 5
@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 1977598524568878, guid: 08b3b43550cd845a2bfeaa02b601244c, type: 2}
   wallSideTile: {fileID: 1408467665424212, guid: c22ee34fe33354095b953d2d06ce8ce8,
     type: 2}
-  stairTile: {fileID: 1081701869589334, guid: f93cf63c63ff54c4fab6776b2cf3e6eb, type: 2}
+  stairTile: {fileID: 1562662670079206, guid: f93cf63c63ff54c4fab6776b2cf3e6eb, type: 2}
   enemies:
   - {fileID: 1229834916287964, guid: 52ed95aa3c682c641acc11bccf7f4717, type: 2}
   - {fileID: 1457432092213124, guid: b9037591c46030b4f8e818e124fdf65c, type: 2}
