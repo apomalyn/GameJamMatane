@@ -27,39 +27,59 @@ public class CharacterControllerMainMenu : MonoBehaviour
 		
 		character_animator.SetBool("Attack", false);
 
-		if (Input.GetKeyDown(KeyCode.UpArrow))
+		if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
 		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y + speed, character_body.transform.localPosition.z), 0.01f );
+			character_body.transform.Translate(0.005f, 0.005f, 0);
+		}
+		else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
+		{
+			character_body.transform.Translate(-0.005f, 0.005f, 0);
+		}
+		else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
+		{
+			character_body.transform.Translate(0.005f, -0.005f, 0);
+		}
+		else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
+		{
+			character_body.transform.Translate(-0.005f, -0.005f, 0);
+		}
+		else if (Input.GetKey(KeyCode.UpArrow))
+		{
 			//move vers le haut
-		}else if (Input.GetKeyDown(KeyCode.DownArrow))
+			character_body.transform.Translate(0, 0.005f, 0);
+		}
+		else if (Input.GetKey(KeyCode.DownArrow))
 		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-speed, character_body.transform.localPosition.z), 0.01f );
+			character_body.transform.Translate(0, -0.005f, 0);
 			//move vers le bas
-		}else if (Input.GetKeyDown(KeyCode.RightArrow))
+		}
+		else if (Input.GetKey(KeyCode.RightArrow))
 		{
 			if (!toright)
 			{
 				flip();
 			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+speed, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
+			character_body.transform.Translate(0.005f, 0, 0);
 			//move vers la droite
-		}else if (Input.GetKeyDown(KeyCode.LeftArrow))
+		}
+		else if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			if (toright)
 			{
 				flip();
 			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-speed, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
+			character_body.transform.Translate(-0.005f, 0, 0);
 			//move vers la gauche
-		}else if (Input.GetKeyDown(KeyCode.Space))
+		}
+		else if (Input.GetKeyDown(KeyCode.Space))
 		{
 			//attack
 			//Attack sound
-			attackSound.PlayOneShot(quack);
+			attackSound.PlayOneShot(quack, 0.3f);
 			//Attack animation
 			character_animator.SetBool("Attack", true);
-		
-			
+
+
 		}
 	}
 
