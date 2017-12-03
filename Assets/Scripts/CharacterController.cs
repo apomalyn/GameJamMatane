@@ -3,105 +3,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 
-public class CharacterController : MonoBehaviour
-{
+public class CharacterController : MonoBehaviour{
+    private bool toright = true;
+    private bool facedown = true;
+    private Animator character_animator;
+    private Rigidbody2D character_body;
+    public float tileSize = 0.1600f;
+    public AudioSource attackSound;
+    public AudioClip quack;
 
-	private bool toright = true;
-	private bool facedown = true;
-	private Animator character_animator;
-	private Rigidbody2D character_body;
-	public int tileSize = 16;
-	public AudioSource attackSound;
-	public AudioClip quack;
-	
-	// Use this for initialization
-	void Start ()
-	{
-		this.character_body = this.GetComponent<Rigidbody2D>();
-		this.character_animator = this.GetComponent<Animator>();
-		attackSound = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		character_animator.SetBool("Attack", false);
+    // Use this for initialization
+    void Start(){
+        character_body = this.GetComponent<Rigidbody2D>();
+        character_animator = this.GetComponent<Animator>();
+        attackSound = GetComponent<AudioSource>();
+    }
 
-//		if (Input.anyKeyDown)
-//		{
-//			switch (Input.inputString)
-//			{
-//					case "up":
-//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 0.01f ); //move vers le haut
-//						break;
-//					case "down":
-//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-tileSize, character_body.transform.localPosition.z), 0.01f );//move vers le bas
-//						break;
-//					case "right":
-//						if (!toright)
-//						{
-//							flip();
-//						}
-//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );//move vers la droite
-//						break;
-//					case "left":
-//						if (toright)
-//						{
-//							flip();
-//						}
-//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );//move vers la gauche
-//					break;
-//					case "space":
-//						//attack
-//						//Attack sound
-//						attackSound.PlayOneShot(quack);
-//						//Attack animation
-//						character_animator.SetBool("Attack", true);
-//					break;
-//						
-//			}
-//		}
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 0.01f );
-			//move vers le haut
-		}else if (Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-tileSize, character_body.transform.localPosition.z), 0.01f );
-			//move vers le bas
-		}else if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			if (!toright)
-			{
-				flip();
-			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
-			//move vers la droite
-		}else if (Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			if (toright)
-			{
-				flip();
-			}
-			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );
-			//move vers la gauche
-		}else if (Input.GetKeyDown(KeyCode.Space))
-		{
-			//attack
-			//Attack sound
-			attackSound.PlayOneShot(quack);
-			//Attack animation
-			character_animator.SetBool("Attack", true);
-		
-			
-		}
-	}
+    // Update is called once per frame
+    void Update(){
+        character_animator.SetBool("Attack", false);
 
-	void flip()
-	{
-		toright = !toright;
-		Vector3 scale = this.transform.localScale;
-		scale.x *= -1;
-		this.transform.localScale = scale;
-	}
+        if (Input.anyKeyDown){
+            Vector3 playerPos = new Vector3();
+
+            if (Input.GetKeyDown(KeyCode.UpArrow)){
+                playerPos = new Vector3(0, 0.1600f, 0);
+                //move vers le haut
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow)){
+                playerPos = new Vector3(0, -0.1600f, 0);
+                //move vers le bas
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow)){
+                if (!toright){
+                    flip();
+                }
+                playerPos = new Vector3(0.1600f, 0, 0);
+                //move vers la droite
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow)){
+                if (toright){
+                    flip();
+                }
+
+                playerPos = new Vector3(-0.1600f, 0, 0);
+                //move vers la gauche
+            }
+            print(playerPos);
+            if (playerPos != new Vector3())
+                character_body.transform.Translate(playerPos, Space.World);
+
+
+            if (Input.GetKeyDown(KeyCode.Space)){
+                //attack
+                //Attack sound
+                attackSound.PlayOneShot(quack);
+                //Attack animation
+                character_animator.SetBool("Attack", true);
+            }
+        }
+    }
+
+    void flip(){
+        toright = !toright;
+        Vector3 scale = this.transform.localScale;
+        scale.x *= -1;
+        this.transform.localScale = scale;
+    }
 }
