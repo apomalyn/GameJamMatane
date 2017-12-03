@@ -60,6 +60,10 @@ public class GuiManager : MonoBehaviour
 				healthImages[n].sprite = healthSprites[1];
                
 			}
+			if (curHealth <= 0)
+			{
+				showGOMenu();
+			}
 		}
 	}
 	
