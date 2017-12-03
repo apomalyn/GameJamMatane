@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public class CharacterController : MonoBehaviour
 {
@@ -25,6 +26,41 @@ public class CharacterController : MonoBehaviour
 	void Update () {
 		
 		character_animator.SetBool("Attack", false);
+
+//		if (Input.anyKeyDown)
+//		{
+//			switch (Input.inputString)
+//			{
+//					case "up":
+//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 0.01f ); //move vers le haut
+//						break;
+//					case "down":
+//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y-tileSize, character_body.transform.localPosition.z), 0.01f );//move vers le bas
+//						break;
+//					case "right":
+//						if (!toright)
+//						{
+//							flip();
+//						}
+//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x+tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );//move vers la droite
+//						break;
+//					case "left":
+//						if (toright)
+//						{
+//							flip();
+//						}
+//						character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x-tileSize, character_body.transform.localPosition.y, character_body.transform.localPosition.z), 0.01f );//move vers la gauche
+//					break;
+//					case "space":
+//						//attack
+//						//Attack sound
+//						attackSound.PlayOneShot(quack);
+//						//Attack animation
+//						character_animator.SetBool("Attack", true);
+//					break;
+//						
+//			}
+//		}
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			character_body.transform.localPosition = Vector3.MoveTowards(character_body.transform.localPosition, new Vector3(character_body.transform.localPosition.x, character_body.transform.localPosition.y+tileSize, character_body.transform.localPosition.z), 0.01f );
