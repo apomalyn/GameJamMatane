@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
+ using UnityEngine.SocialPlatforms.Impl;
 
 public class CharacterController : MonoBehaviour{
     private bool toright = true;
@@ -11,12 +12,14 @@ public class CharacterController : MonoBehaviour{
     public float tileSize = 0.1600f;
     public AudioSource attackSound;
     public AudioClip quack;
+    public Canvas playerGUI;
 
     // Use this for initialization
     void Start(){
         character_body = this.GetComponent<Rigidbody2D>();
         character_animator = this.GetComponent<Animator>();
         attackSound = GetComponent<AudioSource>();
+        this.takeDamage();
     }
 
     // Update is called once per frame
@@ -62,6 +65,11 @@ public class CharacterController : MonoBehaviour{
                 character_animator.SetBool("Attack", true);
             }
         }
+    }
+
+    public void takeDamage()
+    {
+        playerGUI.GetComponent<GuiManager>().TakeDamage();
     }
 
     void flip(){

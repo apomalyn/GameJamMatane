@@ -11,6 +11,7 @@ TagManager:
   - HealFloor
   - Ennemy
   - item
+  - GOObjects
   layers:
   - Default
   - TransparentFX
@@ -62,4 +63,10 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 549628461
+    locked: 0
+  - name: filter
+    uniqueID: 1075088389
+    locked: 0
+  - name: gui
+    uniqueID: 814750745
     locked: 0
