@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour{
 	private BoardManager boardManager;
 
 	private int levelCurrent = 0;
-
+	
 	private void Awake(){
 		boardManager = GetComponent<BoardManager>();
 		InitGame();

@@ -6,23 +6,47 @@ using UnityEngine;
 
 public class EnnemyController : MonoBehaviour
 {
+	public enum EnemyType{
+		Bat,
+		Skeleton,
+		BlackMage
+	}
 
-	public float tileSize = 0.16f;
-	public GameObject[] pathPoint; //tableau qui va contenir les gameObjects représentant le chemin a suivre
-	private int currentPathPoint = 0; //point courant du chemin que nous tentons de rejoindre
-	public static float vitesse = 0.5f;
-	private Vector3 posStart;
+	public enum Direction{
+		Up,
+		Down,
+		Left,
+		Right,
+		None
+	}
 	
-	[SerializeField]
+	public float tileSize = 0.16f;
+	
+	
 	private int life;
 	private Rigidbody2D ennemy_body;
+
+	public EnemyType type;
+	
+	// Pattern de mouvement
+	private int[,] pattern = {
+		{4, 3, 4, 3},
+		{4, 4, 0, 0},
+		{4, 4, 0, 0}
+	};
+
+	private Direction[,] directionPattern = {
+		{Direction.Up, Direction.Left, Direction.Up, Direction.Right},
+		{Direction.Up, Direction.Down, Direction.None, Direction.None},
+		{Direction.Left, Direction.Right, Direction.None, Direction.None},
+	};
 	
 	
 	// Use this for initialization
 	void Start ()
 	{
 		ennemy_body = GetComponent<Rigidbody2D>();
-		posStart = gameObject.transform.position;
+	
 	}
 	
 	// Update is called once per frame
@@ -30,6 +54,7 @@ public class EnnemyController : MonoBehaviour
 	{
 		deplacement();
 	}
+	
 	void OnTriggerEnter2D(Collider2D collider)
 	{
 		if (collider.gameObject.tag == "Player") 
@@ -45,26 +70,6 @@ public class EnnemyController : MonoBehaviour
 	void deplacement()
 	{
 		
-		if (currentPathPoint < pathPoint.Length) //si le chemin n'est pas parcouru en entier
-		{
-			Vector3 target = pathPoint [currentPathPoint].transform.position; //vecteur vers le prochain point du chemin a suivre
-			Vector3 moveDirection = target - transform.position; //vecteur qui va représenter la direction à suivre pour notre ennemi
-			Vector3 velocity = ennemy_body.velocity;
-			
-			if (moveDirection.magnitude < 0.11)  //si on est rendu au point
-			{
-				currentPathPoint++; //on passe au point suivant
-			} 
-			else 
-			{
-				velocity = moveDirection.normalized * vitesse; //on détermine une vélocité en fonction de la vitesse et de la direction à suivre
-			}
-			ennemy_body.velocity = velocity; //on applique cette vélocité à notre ennemi
-		}
-		else  //si le chemin est terminé
-		{
-			currentPathPoint = 0;
-		}
 	}
 
 	void destroy()
