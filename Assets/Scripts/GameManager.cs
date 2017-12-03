@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour{
 
-	public BoardManager boardManager;
+	private BoardManager boardManager;
 
-	private int level = 3;
+	private int levelCurrent = 0;
 
 	private void Awake(){
 		boardManager = GetComponent<BoardManager>();
@@ -14,5 +14,6 @@ public class GameManager : MonoBehaviour{
 	}
 
 	private void InitGame(){
+		boardManager.nextLevel();
 	}
 }

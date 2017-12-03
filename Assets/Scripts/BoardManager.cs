@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour{
     public GameObject stairTile;
 
     public GameObject[] enemies; //An array who contains different enemies
-    public GameObject player;
+    private GameObject player;
 
     private TileType[][] tiles; // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms; // All the rooms that are created for this board.
@@ -43,11 +43,15 @@ public class BoardManager : MonoBehaviour{
 
     private float sizeTile = 0.1600f;
 
-    private void Start(){
-        // Create the board holder.
+    public void nextLevel(){
+        player = GameObject.Find("Character");
+        
+        Destroy(boardHolder);
+        Destroy(enemiesHolder);
+        
         boardHolder = new GameObject("BoardHolder");
         enemiesHolder = new GameObject("EnemisHolder");
-
+        
         SetupTilesArray();
 
         CreateRoomsAndCorridors();
@@ -107,12 +111,6 @@ public class BoardManager : MonoBehaviour{
                 // Setup the corridor based on the room that was just created.
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
-
-            if (i == Mathf.Round(rooms.Length * .5f)){
-                Debug.Log("Player: " + rooms[i].xPos + ":" + rooms[i].yPos);
-                Vector3 playerPos = new Vector3(rooms[i].xPos * sizeTile, rooms[i].yPos * sizeTile, 0);
-                Instantiate(player, playerPos, Quaternion.identity);
-            }
         }
         
         bool available = false;
@@ -152,6 +150,7 @@ public class BoardManager : MonoBehaviour{
             Debug.Log("Stair is not at a good place, restart generation");
             rooms = new Room[1];
             corridors = new Corridor[1];
+            
             CreateRoomsAndCorridors();
         }else{
             for (int i = 0; i < STAIR_WIDTH; i++){
@@ -162,6 +161,14 @@ public class BoardManager : MonoBehaviour{
             GameObject stair = Instantiate(stairTile, new Vector3((xStaircase - (STAIR_HEIGHT / 2)) * sizeTile - 0.005f, (yStaircase) * sizeTile - 0.01f, 0f), Quaternion.identity);
             stair.transform.parent = boardHolder.transform;   
         }
+
+        indexRoom = (int)Mathf.Round(rooms.Length * .5f);
+        int xCoordPlayer = rooms[indexRoom].xPos;
+        int yCoordPlayer = rooms[indexRoom].yPos;
+        
+        Debug.Log("Player: " + xCoordPlayer + ":" + yCoordPlayer);
+        Vector3 playerPos = new Vector3(xCoordPlayer * sizeTile, yCoordPlayer * sizeTile, 0);
+        player.transform.position = playerPos;
     }
 
 
