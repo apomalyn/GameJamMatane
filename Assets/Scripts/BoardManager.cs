@@ -345,4 +345,8 @@ public class BoardManager : MonoBehaviour{
 
         tileInstance.transform.parent = boardHolder.transform;
     }
+
+    public TileType[][] getTilesGrid(){
+        return tiles;
+    } 
 }
