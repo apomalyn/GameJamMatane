@@ -168,6 +168,12 @@ MonoBehaviour:
   - {fileID: 1589661583170558, guid: 1fa588e034f1c0d44a1bea7b5abb0f22, type: 2}
   - {fileID: 1552562073828160, guid: b0c4f84ad3b8e384d87682285c59dfb2, type: 2}
   - {fileID: 1867007375643418, guid: d81621fbd8a38fd419f1f05b98552ad9, type: 2}
+  outerWallTilesSpe:
+  - {fileID: 1963772117957126, guid: 1fca6ed22b22847da99cb495e60f125d, type: 2}
+  - {fileID: 1159648793416216, guid: a9d1a38a2ff9142d98f8ccb7251d98e9, type: 2}
+  - {fileID: 1214554239925814, guid: c3ad4a1eb0136432ba758f209e66cca7, type: 2}
+  - {fileID: 1175635747738904, guid: c00f22463515c462683c4e4b9db90484, type: 2}
+  - {fileID: 1584052722268040, guid: 45c6da5b430b34358bd5e4d0fc6168ce, type: 2}
   floorUnderWallTiles:
   - {fileID: 1751217257783608, guid: bf34dbff781fa4d1ba2a9720e9b652bc, type: 2}
   - {fileID: 1410774621598542, guid: 8ee6d41ead91740eb94543cd25a84c12, type: 2}
@@ -187,7 +193,7 @@ MonoBehaviour:
   - {fileID: 1229834916287964, guid: 52ed95aa3c682c641acc11bccf7f4717, type: 2}
   - {fileID: 1457432092213124, guid: b9037591c46030b4f8e818e124fdf65c, type: 2}
   - {fileID: 1411284752366674, guid: 8ef91a43012576d4197c681dce41e8a6, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1670730679858338, guid: 6a334b45ca9148c40933f32b33f39781, type: 2}
 --- !u!4 &404641878
 Transform:
   m_ObjectHideFlags: 0

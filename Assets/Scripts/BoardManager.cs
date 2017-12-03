@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour{
     public GameObject[] floorTiles; // An array of wall tile prefabs.
     public GameObject[] outerWallTilesTop; // An array of outer wall tile prefabs.
     public GameObject[] outerWallTilesBottom; // An array of outer wall tile prefabs.
+    public GameObject[] outerWallTilesSpe; // An array of outer wall special tile prefabs.
     public GameObject[] floorUnderWallTiles;
     public GameObject[] powerUpTilesTop;
     public GameObject[] powerUpTilesBottom;
@@ -295,6 +296,15 @@ public class BoardManager : MonoBehaviour{
             
             position = new Vector3(xCoord * sizeTile, (yCoord-1) * sizeTile, 0f);
             tileInstance = Instantiate(powerUpTilesBottom[randomIndex], position, Quaternion.identity);
+        } else if (tileSpe < 10){
+            position = new Vector3(xCoord * sizeTile, yCoord * sizeTile, 0f);
+            randomIndex = Random.Range(0, outerWallTilesSpe.Length);
+            tileInstance = Instantiate(outerWallTilesSpe[randomIndex], position, Quaternion.identity);
+            tileInstance.transform.parent = boardHolder.transform;
+            
+            randomIndex = Random.Range(0, floorUnderWallTiles.Length);
+            position = new Vector3(xCoord * sizeTile, (yCoord-1) * sizeTile, 0f);
+            tileInstance = Instantiate(floorUnderWallTiles[randomIndex], position, Quaternion.identity);
         } else{
             
             position = new Vector3(xCoord * sizeTile, yCoord * sizeTile, 0f);
