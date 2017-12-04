@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour{
 		boardManager = BoardManager.instance;
 		camera = GameObject.Find("Main Camera");
 		player = GameObject.Find("Character").GetComponent<CharacterController>();
-		InitGame();
+		loadLevel();
 	}
 
 	public void updateCamera(Vector3 position){
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour{
 		);
 	}
 
-	private void InitGame(){
+	public void loadLevel(){
 		boardManager.nextLevel();
 	}
 

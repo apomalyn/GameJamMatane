@@ -50,31 +50,32 @@ public class CharacterController : Entity{
     protected override bool defineAction(Direction direction){
         LayerMask stairLayer = LayerMask.NameToLayer("stair");
         
-        if (!base.defineAction(direction)){
-            Vector2 vector = Vector2.up;
-        
-            switch (direction){
-                case Direction.Up:
-                    vector = Vector2.up;
-                    break;
-                case Direction.Down:
-                    vector = Vector2.down;
-                    break;
-                case Direction.Right:
-                    vector = Vector2.right;
-                    break;
-                case Direction.Left:
-                    vector = Vector2.left;
-                    break;
-            }
 
-            if (Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value)){
-                changeLevel();
-                return true;
-            }
+        Vector2 vector = Vector2.up;
+    
+        switch (direction){
+            case Direction.Up:
+                vector = Vector2.up;
+                break;
+            case Direction.Down:
+                vector = Vector2.down;
+                break;
+            case Direction.Right:
+                vector = Vector2.right;
+                break;
+            case Direction.Left:
+                vector = Vector2.left;
+                break;
         }
 
-        return false;
+        RaycastHit2D test = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value);
+
+        if (Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value)){
+            changeLevel();
+            return true;
+        }
+
+        return base.defineAction(direction);
     }
 
 
@@ -95,11 +96,11 @@ public class CharacterController : Entity{
     private void inscreaseScore(){
         GuiManager gui = playerGUI.GetComponent<GuiManager>();
 
-        gui.updateScore(10);
+        //gui.updateScore(10);
     }
 
     public void changeLevel(){
-        
+        GameManager.instance.loadLevel();
     }
     
     public override bool hit(){
