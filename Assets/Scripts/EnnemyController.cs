@@ -15,6 +15,8 @@ public class EnnemyController : Entity {
 	
 	public float tileSize = 0.16f;
 
+	private LayerMask playerLayer;
+
 	private State currentState = State.Pacific;
 	private int life;
 	private int restMove = 0;
@@ -53,6 +55,7 @@ public class EnnemyController : Entity {
 	{
 		tiles = BoardManager.instance.getTilesGrid();
 		restMove = pattern[(int) type, indexCurrentMove];
+		playerLayer = LayerMask.NameToLayer("player");
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider)
@@ -64,6 +67,10 @@ public class EnnemyController : Entity {
 	}
 
 	public void nextMove(){
+		
+		
+		//if(Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << playerLayer.value))
+		
 		if (currentState == State.Pacific){
 			if (restMove == 0){
 				indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE && directionPattern[(int) type, indexCurrentMove] != Direction.None) ? indexCurrentMove + 1 : 0;
