@@ -79,17 +79,18 @@ public class GuiManager : MonoBehaviour
 		}
 	}
 
-	public void TakeDamage()
+	public int TakeDamage()
 	{
 		curHealth--;
 		health--;
 		UpdateHearts();
+		return curHealth;
 	}
 
 	public void updateScore(int score)
 	{
-		this.score = score;
-		this.scoreText.text = score.ToString();
+		this.score += score;
+		this.scoreText.text = this.score.ToString();
 	}
 
 	void SetScoreText()

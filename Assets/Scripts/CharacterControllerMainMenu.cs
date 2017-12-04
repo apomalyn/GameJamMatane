@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
+using UnityEngine.SceneManagement;
 
 public class CharacterControllerMainMenu : MonoBehaviour
 {
@@ -102,5 +103,28 @@ public class CharacterControllerMainMenu : MonoBehaviour
 		Vector3 scale = this.transform.localScale;
 		scale.x *= -1;
 		this.transform.localScale = scale;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collider)
+	{
+		switch (collider.gameObject.name)
+		{
+				case "TPGame":
+					SceneManager.LoadScene("Main");
+					break;
+					
+				case "TPcredits":
+					SceneManager.LoadScene("Credits");
+					break;
+					
+				case "ExitGame":
+					
+					Application.Quit();
+					break;
+				
+				case "TPMenu":
+					SceneManager.LoadScene("MainMenu");
+					break;
+		}
 	}
 }

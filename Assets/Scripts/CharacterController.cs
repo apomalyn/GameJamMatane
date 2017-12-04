@@ -8,6 +8,7 @@ public class CharacterController : Entity{
     public float tileSize = 0.1600f;
     public AudioSource attackSound;
     public AudioClip quack;
+    public AudioClip cri;
     public Canvas playerGUI;
     
     // Use this for initialization
@@ -20,8 +21,9 @@ public class CharacterController : Entity{
     // Update is called once per frame
     void Update(){
         character_animator.SetBool("Attack", false);
+        //character_animator.SetBool("dead", false);
         
-        if (Input.anyKeyDown){
+        if (Input.anyKeyDown && !character_animator.GetBool("dead")){
 
             if (Input.GetKeyDown(KeyCode.UpArrow)){
                 tryMove(Direction.Up);
@@ -103,7 +105,11 @@ public class CharacterController : Entity{
     }
     
     public override bool hit(){
-        playerGUI.GetComponent<GuiManager>().TakeDamage();
+        if (playerGUI.GetComponent<GuiManager>().TakeDamage() <= 0)
+        {
+            character_animator.SetBool("dead", true);
+            attackSound.PlayOneShot(cri);
+        }
         return false;
     }
 }
