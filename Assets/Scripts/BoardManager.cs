@@ -66,7 +66,7 @@ public class BoardManager : MonoBehaviour{
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        //InstantiateEnemy();
+        InstantiateEnemy();
 
         GameObject.Find("Main Camera").transform.position = new Vector3(
             player.transform.position.x,
@@ -185,10 +185,10 @@ public class BoardManager : MonoBehaviour{
         player.transform.position = playerPos;
         GameManager.instance.getScriptPlayer().setPosition(new Tile(xCoordPlayer, yCoordPlayer));
 
-        Vector3 enemyPos = new Vector3((xCoordPlayer + 2) * sizeTile, yCoordPlayer * sizeTile, 0);
+        /*Vector3 enemyPos = new Vector3((xCoordPlayer + 2) * sizeTile, yCoordPlayer * sizeTile, 0);
         GameObject enemy = Instantiate(enemies[1], enemyPos, Quaternion.identity);
         enemy.transform.parent = enemiesHolder.transform;
-        enemy.GetComponent<EnnemyController>().setPosition(new Tile(xCoordPlayer + 2, yCoordPlayer + 2));
+        enemy.GetComponent<EnnemyController>().setPosition(new Tile(xCoordPlayer + 2, yCoordPlayer + 2));*/
     }
 
 
@@ -303,8 +303,8 @@ public class BoardManager : MonoBehaviour{
                 yCoordRandom = Random.Range(0, heightCurrentRoom);
                 
                 position = new Vector3(
-                    (room.xPos + xCoordRandom) * sizeTile,
-                    (room.yPos + yCoordRandom) * sizeTile,
+                    (room.xPos + xCoordRandom) * 0.1600f,
+                    (room.yPos + yCoordRandom) * 0.1600f,
                     0f
                 );
 

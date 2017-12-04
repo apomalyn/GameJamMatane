@@ -23,7 +23,7 @@ public class EnnemyController : Entity {
 	private State currentState = State.Pacific;
 	private List<Direction> pathInAggressive;
 
-	private int life;
+	private int life = 1;
 	private int restMove = 0;
 	private int indexCurrentMove = 0;
 
@@ -163,8 +163,8 @@ public class EnnemyController : Entity {
 		cost.Add(current, 1);
 		toVisit.Add(current);
 
-		for (int i = 0; i < 4; i++){
-			for (int j = 0; j < 4; j++){
+		for (int i = 0; i < 4 && toVisit.Count > 0; i++){
+			for (int j = 0; j < 4 && toVisit.Count > 0; j++){
 				current = toVisit[0];
 				toVisit.Remove(current);
 
@@ -245,7 +245,12 @@ public class EnnemyController : Entity {
 		}
 		return false;
 	}
-	
+
+	protected override void attack(GameObject entity){
+		if(life > 0)
+			base.attack(entity);
+	}
+
 	public Tile getPosition(){
 		return base.getPosition();
 	}

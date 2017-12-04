@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Win32.SafeHandles;
 using UnityEditor;
 using UnityEngine;
 
@@ -51,7 +52,10 @@ public abstract class Entity : MonoBehaviour{
 
     protected virtual void attack(GameObject entity){
         if (entity.tag.Equals("Ennemy")){
-            entity.GetComponent<EnnemyController>().hit();
+            EnnemyController script = entity.GetComponent<EnnemyController>();
+            if (script.getPosition().Equals(GameManager.instance.getPositionPlayer())){
+                script.hit();
+            }
         }else{
             entity.GetComponent<CharacterController>().hit();
         }
@@ -101,13 +105,21 @@ public abstract class Entity : MonoBehaviour{
 
         RaycastHit2D hit;
         
-        if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << enemyLayer.value)) && gameObject.layer == playerLayer){
-            attack(hit.collider.gameObject);
-            return true;
-        }else if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << playerLayer.value)) && gameObject.layer == enemyLayer){
-            attack(hit.collider.gameObject);
-            return true;
-        }else if (!Physics2D.Raycast(transform.position, vector, 0.16f, 1 << wallLayer.value)){
+        if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << enemyLayer.value))){
+            if (gameObject.layer == playerLayer){
+                attack(hit.collider.gameObject);
+                return true;   
+            }
+        }
+        
+        if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << playerLayer.value))){
+            if (gameObject.layer == enemyLayer){
+                attack(hit.collider.gameObject);
+                return true;
+            }
+        }
+        
+        if (!Physics2D.Raycast(transform.position, vector, 0.16f, 1 << wallLayer.value)){
             move(direction);
             return true;
         }
