@@ -96,7 +96,7 @@ public class CharacterController : Entity{
     private void inscreaseScore(){
         GuiManager gui = playerGUI.GetComponent<GuiManager>();
 
-        //gui.updateScore(10);
+        gui.updateScore(10);
     }
 
     public void changeLevel(){
