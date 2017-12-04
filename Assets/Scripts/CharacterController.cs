@@ -70,8 +70,6 @@ public class CharacterController : Entity{
                 break;
         }
 
-        RaycastHit2D test = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value);
-
         if (Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value)){
             changeLevel();
             return true;
@@ -112,5 +110,13 @@ public class CharacterController : Entity{
             attackSound.PlayOneShot(cri);
         }
         return false;
+    }
+
+    public Tile getPosition(){
+        return base.getPosition();
+    }
+
+    public void setPosition(Tile tile){
+        base.setPosition(tile);
     }
 }

@@ -43,7 +43,11 @@ public class GameManager : MonoBehaviour{
 		}
 	}
 
-	public Vector3 getPositionPlayer(){
-		return player.transform.position;
+	public Tile getPositionPlayer(){
+		return playerScript.getPosition();
+	}
+
+	public CharacterController getScriptPlayer(){
+		return playerScript;
 	}
 }

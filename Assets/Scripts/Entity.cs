@@ -10,6 +10,8 @@ public abstract class Entity : MonoBehaviour{
     private bool facedown = true;
 
     protected const float TILE_SIZE = 0.1600f;
+
+    protected Tile position;
     
     protected enum Direction{
         Up,
@@ -26,16 +28,20 @@ public abstract class Entity : MonoBehaviour{
         switch (direction){
             case Direction.Up:
                 pos = new Vector3(0, 0.1600f, 0);
+                position = new Tile(position.x, position.y + 1);
                 break;
             case Direction.Down:
                 pos = new Vector3(0, -0.1600f, 0);
+                position = new Tile(position.x, position.y - 1);
                 break;
             case Direction.Left:
                 pos = new Vector3(-0.1600f, 0, 0);
+                position = new Tile(position.x - 1, position.y);
                 if (toRight)    flip();
                 break;
             case Direction.Right:
                 pos = new Vector3(0.1600f, 0, 0);
+                position = new Tile(position.x + 1, position.y);
                 if(!toRight)    flip();
                 break;
         }
@@ -113,5 +119,13 @@ public abstract class Entity : MonoBehaviour{
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    public Tile getPosition(){
+        return position;
+    }
+
+    public void setPosition(Tile tile){
+        position = tile;
     }
 }

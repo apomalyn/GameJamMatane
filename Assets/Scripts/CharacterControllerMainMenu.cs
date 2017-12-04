@@ -107,6 +107,7 @@ public class CharacterControllerMainMenu : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
+		print(collider.gameObject.name);
 		switch (collider.gameObject.name)
 		{
 				case "TPGame":
