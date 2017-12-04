@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour{
 
 	private GameObject camera;
 
-	private CharacterController player;
+	public GameObject player;
+	
+	private CharacterController playerScript;
 
 	private int levelCurrent = 0;
 	
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour{
 		instance = this;
 		boardManager = BoardManager.instance;
 		camera = GameObject.Find("Main Camera");
-		player = GameObject.Find("Character").GetComponent<CharacterController>();
+		playerScript = player.GetComponent<CharacterController>();
 		loadLevel();
 	}
 
@@ -39,5 +41,9 @@ public class GameManager : MonoBehaviour{
 		for (int i = 0; i < scripts.Length; i++){
 			scripts[i].nextMove();
 		}
-	}	
+	}
+
+	public Vector3 getPositionPlayer(){
+		return player.transform.position;
+	}
 }
