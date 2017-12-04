@@ -66,7 +66,7 @@ public class BoardManager : MonoBehaviour{
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        //InstantiateEnemy();
+        InstantiateEnemy();
 
         GameObject.Find("Main Camera").transform.position = new Vector3(
             player.transform.position.x,
@@ -362,5 +362,9 @@ public class BoardManager : MonoBehaviour{
 
     public TileType[][] getTilesGrid(){
         return tiles;
-    } 
+    }
+
+    public GameObject getEnemiesHolder(){
+        return enemiesHolder;
+    }
 }

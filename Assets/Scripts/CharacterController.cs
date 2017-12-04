@@ -9,7 +9,6 @@ public class CharacterController : Entity{
     public AudioSource attackSound;
     public AudioClip quack;
     public Canvas playerGUI;
-    public LayerMask moveLayer;
     
     // Use this for initialization
     void Start(){
@@ -38,9 +37,14 @@ public class CharacterController : Entity{
             }
             
             if (Input.GetKeyDown(KeyCode.P)){
-                this.hit();
+                hit();
             }
         }
+    }
+
+    protected override void tryMove(Direction direction){
+        base.tryMove(direction);
+        GameManager.instance.nextTurn();
     }
 
     protected override bool defineAction(Direction direction){
@@ -82,15 +86,23 @@ public class CharacterController : Entity{
     protected override void attack(GameObject entity){
         attackSound.PlayOneShot(quack);
         character_animator.SetBool("Attack", true);
-        
-        base.attack(entity);
+
+        if (entity.GetComponent<EnnemyController>().hit()){
+            inscreaseScore();
+        }
+    }
+
+    private void inscreaseScore(){
+        GuiManager gui = playerGUI.GetComponent<GuiManager>();
+
+        gui.updateScore(10);
     }
 
     public void changeLevel(){
         
     }
     
-    public override void hit(){
+    public override bool hit(){
         playerGUI.GetComponent<GuiManager>().TakeDamage();
     }
 }

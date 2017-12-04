@@ -1,31 +1,22 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
-using UnityEngine.WSA;
 
-public class EnnemyController : MonoBehaviour
-{
+public class EnnemyController : Entity {
 	public enum EnemyType{
 		Bat = 0,
 		Skeleton = 1,
 		BlackMage = 2
 	}
 
-	public enum Direction{
-		Up,
-		Down,
-		Left,
-		Right,
-		None
+	private enum State{
+		Pacific,
+		Aggressive
 	}
 	
 	public float tileSize = 0.16f;
-	
-	
+
+	private State currentState = State.Pacific;
 	private int life;
-	private Rigidbody2D ennemy_body;
 	private int restMove = 0;
 	private int indexCurrentMove = 0;
 
@@ -60,24 +51,8 @@ public class EnnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		ennemy_body = GetComponent<Rigidbody2D>();
 		tiles = BoardManager.instance.getTilesGrid();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-		if (go)
-		{
-			deplacement();
-			go = false;
-		}
-		else
-		{
-			System.Threading.Thread.Sleep(2000);
-			go = true;
-		}
+		restMove = pattern[(int) type, indexCurrentMove];
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider)
@@ -87,6 +62,19 @@ public class EnnemyController : MonoBehaviour
 			targetOk = true;
 		}
 	}
+
+	public void nextMove(){
+		if (currentState == State.Pacific){
+			if (restMove == 0){
+				indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE && directionPattern[(int) type, indexCurrentMove] != Direction.None) ? indexCurrentMove + 1 : 0;
+				restMove = pattern[(int)type, indexCurrentMove];
+			}
+
+			restMove--;
+			tryMove(directionPattern[(int)type, indexCurrentMove]);
+		}
+	}
+
 
 	void deplacement()
 	{
@@ -103,15 +91,14 @@ public class EnnemyController : MonoBehaviour
 		else{
 			Vector3 position = new Vector3();
 
-			if (restMove == 0)
-			{
+		if (restMove == 0)
+		{
+			indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
+			/*while (pattern[(int) type, indexCurrentMove] == 0){
 				indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
-				while (pattern[(int) type, indexCurrentMove] == 0)
-				{
-					indexCurrentMove = (indexCurrentMove + 1 < MAX_MOVE) ? indexCurrentMove + 1 : 0;
-				}
-				restMove = pattern[(int) type, indexCurrentMove];
-			}
+			}*/
+			restMove = pattern[(int) type, indexCurrentMove];
+		}
 
 			switch (directionPattern[(int) type, indexCurrentMove])
 			{
@@ -134,14 +121,17 @@ public class EnnemyController : MonoBehaviour
 			}
 			if (position != new Vector3())
 			{
-				ennemy_body.transform.Translate(position, Space.World);
 				restMove--;
 			}
 		}
 	}
 
-	void destroy()
-	{
-		Destroy(gameObject);
+	public override bool hit(){
+		life--;
+		
+		if (life < 1){
+			GameManager.instance.inscreaseScore();
+			Destroy(gameObject);
+		}
 	}
 }

@@ -10,14 +10,13 @@ public abstract class Entity : MonoBehaviour{
     private bool facedown = true;
 
     protected const float TILE_SIZE = 0.1600f;
-
-    public LayerMask moveLayer;
     
     protected enum Direction{
         Up,
         Down,
         Left,
-        Right
+        Right,
+        None
     }
     
     
@@ -42,21 +41,20 @@ public abstract class Entity : MonoBehaviour{
         }
         
         transform.Translate(pos, Space.World);
-        
     }
 
     protected virtual void attack(GameObject entity){
-        if (entity.layer == LayerMask.GetMask("enemy")){
+        if (entity.tag.Equals("Ennemy")){
             entity.GetComponent<EnnemyController>().hit();
         }else{
             entity.GetComponent<CharacterController>().hit();
         }
     }
 
-    public abstract void hit();
+    public abstract bool hit();
 
 
-    protected void tryMove(Direction direction){
+    protected virtual void tryMove(Direction direction){
         switch (direction){
             case Direction.Up:
                 defineAction(Direction.Up);
@@ -74,7 +72,7 @@ public abstract class Entity : MonoBehaviour{
     }
 
     protected virtual bool defineAction(Direction direction){
-        LayerMask enemyLayer = 1 << LayerMask.NameToLayer("enemy");
+        LayerMask enemyLayer = LayerMask.NameToLayer("enemy");
         LayerMask playerLayer = LayerMask.NameToLayer("player");
         LayerMask wallLayer = LayerMask.NameToLayer("wall");
             
@@ -96,19 +94,13 @@ public abstract class Entity : MonoBehaviour{
         }
 
         RaycastHit2D hit;
-
-        hit = Physics2D.Raycast(transform.position, vector, 0.16f, wallLayer);
         
-        if (hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << enemyLayer.value)){
-            if (gameObject.layer == playerLayer){
-                attack(hit.collider.gameObject);
-                return true;
-            }
-        }else if (hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << playerLayer.value)){
-            if (gameObject.layer == enemyLayer){
-                attack(hit.collider.gameObject);
-                return true;
-            }
+        if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << enemyLayer.value)) && gameObject.layer == playerLayer){
+            attack(hit.collider.gameObject);
+            return true;
+        }else if ((hit = Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << playerLayer.value)) && gameObject.layer == enemyLayer){
+            attack(hit.collider.gameObject);
+            return true;
         }else if (!Physics2D.Raycast(transform.position, vector, 0.16f, 1 << wallLayer.value)){
             move(direction);
             return true;
@@ -118,8 +110,8 @@ public abstract class Entity : MonoBehaviour{
     
     private void flip(){
         toRight = !toRight;
-        Vector3 scale = this.transform.localScale;
+        Vector3 scale = transform.localScale;
         scale.x *= -1;
-        this.transform.localScale = scale;
+        transform.localScale = scale;
     }
 }

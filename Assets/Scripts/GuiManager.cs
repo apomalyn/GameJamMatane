@@ -122,7 +122,7 @@ public class GuiManager : MonoBehaviour
 			g.SetActive(false);
 		}
 	}*/
-
+	
 	public void MainMenu()
 	{
 		SceneManager.LoadScene("MainMenu");
