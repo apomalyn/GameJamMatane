@@ -104,5 +104,6 @@ public class CharacterController : Entity{
     
     public override bool hit(){
         playerGUI.GetComponent<GuiManager>().TakeDamage();
+        return false;
     }
 }

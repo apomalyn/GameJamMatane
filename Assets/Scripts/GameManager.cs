@@ -39,10 +39,5 @@ public class GameManager : MonoBehaviour{
 		for (int i = 0; i < scripts.Length; i++){
 			scripts[i].nextMove();
 		}
-	}
-
-	public void inscreaseScore(){
-		player.
-	}
-	
+	}	
 }

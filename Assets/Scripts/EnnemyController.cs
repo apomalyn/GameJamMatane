@@ -130,8 +130,9 @@ public class EnnemyController : Entity {
 		life--;
 		
 		if (life < 1){
-			GameManager.instance.inscreaseScore();
 			Destroy(gameObject);
+			return true;
 		}
+		return false;
 	}
 }

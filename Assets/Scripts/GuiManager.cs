@@ -85,7 +85,13 @@ public class GuiManager : MonoBehaviour
 		health--;
 		UpdateHearts();
 	}
-	
+
+	public void updateScore(int score)
+	{
+		this.score = score;
+		this.scoreText.text = score.ToString();
+	}
+
 	void SetScoreText()
 	{
 		scoreText.text = score.ToString();
