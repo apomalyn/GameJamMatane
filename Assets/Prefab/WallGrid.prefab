@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4204982869808670}
   - component: {fileID: 212734530198942220}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4607074752352770}
   - component: {fileID: 212256749749316676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4730861341621168}
   - component: {fileID: 50612411953877502}
   - component: {fileID: 61569660161721504}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallGrid
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1956894061
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -222,7 +222,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1956894061
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300040, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

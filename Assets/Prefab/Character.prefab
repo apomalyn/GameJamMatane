@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 95412917638307122}
   - component: {fileID: 114369403988230064}
   - component: {fileID: 82519625611806566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -198,9 +198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82671d8fe36776a419fecf82459ba976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveLayer:
+    serializedVersion: 2
+    m_Bits: 0
   tileSize: 16
   attackSound: {fileID: 0}
   quack: {fileID: 8300000, guid: 2bce6294fb5424f4b8de7b933c91f734, type: 3}
+  playerGUI: {fileID: 0}
+  moveLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &212178321195183654
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -233,7 +240,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 549628461
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fad1cbbcc39a2254490f6755c32721e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

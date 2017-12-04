@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4892316035808352}
   - component: {fileID: 50828798927323596}
   - component: {fileID: 61411164420007552}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TileSide
-  m_TagString: floor
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

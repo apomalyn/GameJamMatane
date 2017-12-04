@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4113308165886716}
   - component: {fileID: 212573988941366684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4595238573666184}
   - component: {fileID: 50139910272801690}
   - component: {fileID: 61443796600703526}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DamageWall1
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4252834493352554}
   - component: {fileID: 212182394936970676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

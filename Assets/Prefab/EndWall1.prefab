@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212922702858669008}
   - component: {fileID: 50098464101761748}
   - component: {fileID: 61279289215335944}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EndWall1
   m_TagString: wall
   m_Icon: {fileID: 0}

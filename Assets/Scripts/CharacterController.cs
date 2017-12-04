@@ -1,84 +1,96 @@
-﻿﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
- using UnityEngine.SocialPlatforms.Impl;
 
-public class CharacterController : MonoBehaviour{
-    private bool toright = true;
-    private bool facedown = true;
+public class CharacterController : Entity{
+
     private Animator character_animator;
     private Rigidbody2D character_body;
     public float tileSize = 0.1600f;
     public AudioSource attackSound;
     public AudioClip quack;
     public Canvas playerGUI;
-
+    public LayerMask moveLayer;
+    
     // Use this for initialization
     void Start(){
-        character_body = this.GetComponent<Rigidbody2D>();
-        character_animator = this.GetComponent<Animator>();
+        character_body = GetComponent<Rigidbody2D>();
+        character_animator = GetComponent<Animator>();
         attackSound = GetComponent<AudioSource>();
-       takeDamage();
     }
 
     // Update is called once per frame
     void Update(){
         character_animator.SetBool("Attack", false);
-
+        
         if (Input.anyKeyDown){
-            Vector3 playerPos = new Vector3();
 
             if (Input.GetKeyDown(KeyCode.UpArrow)){
-                playerPos = new Vector3(0, 0.1600f, 0);
-                //move vers le haut
+                tryMove(Direction.Up);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow)){
-                playerPos = new Vector3(0, -0.1600f, 0);
-                //move vers le bas
+                tryMove(Direction.Down);
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow)){
-                if (!toright){
-                    flip();
-                }
-                playerPos = new Vector3(0.1600f, 0, 0);
-                //move vers la droite
+                tryMove(Direction.Right);
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow)){
-                if (toright){
-                    flip();
-                }
-
-                playerPos = new Vector3(-0.1600f, 0, 0);
-                //move vers la gauche
+                tryMove(Direction.Left);
             }
-            print(playerPos);
-            if (playerPos != new Vector3())
-                character_body.transform.Translate(playerPos, Space.World);
-
-
-            if (Input.GetKeyDown(KeyCode.Space)){
-                //attack
-                //Attack sound
-                attackSound.PlayOneShot(quack);
-                //Attack animation
-                character_animator.SetBool("Attack", true);
-            }
+            
             if (Input.GetKeyDown(KeyCode.P)){
-                this.takeDamage();
+                this.hit();
             }
         }
     }
 
-    public void takeDamage()
-    {
-        playerGUI.GetComponent<GuiManager>().TakeDamage();
+    protected override bool defineAction(Direction direction){
+        LayerMask stairLayer = LayerMask.NameToLayer("stair");
+        
+        if (!base.defineAction(direction)){
+            Vector2 vector = Vector2.up;
+        
+            switch (direction){
+                case Direction.Up:
+                    vector = Vector2.up;
+                    break;
+                case Direction.Down:
+                    vector = Vector2.down;
+                    break;
+                case Direction.Right:
+                    vector = Vector2.right;
+                    break;
+                case Direction.Left:
+                    vector = Vector2.left;
+                    break;
+            }
+
+            if (Physics2D.Raycast(transform.position, vector, TILE_SIZE, 1 << stairLayer.value)){
+                changeLevel();
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    void flip(){
-        toright = !toright;
-        Vector3 scale = this.transform.localScale;
-        scale.x *= -1;
-        this.transform.localScale = scale;
+
+    protected override void move(Direction direction){
+        base.move(direction);
+        GameManager.instance.updateCamera(transform.position);
+    }
+
+    protected override void attack(GameObject entity){
+        attackSound.PlayOneShot(quack);
+        character_animator.SetBool("Attack", true);
+        
+        base.attack(entity);
+    }
+
+    public void changeLevel(){
+        
+    }
+    
+    public override void hit(){
+        playerGUI.GetComponent<GuiManager>().TakeDamage();
     }
 }

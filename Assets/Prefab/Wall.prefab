@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4697485926482812}
   - component: {fileID: 50056492184621370}
   - component: {fileID: 61293381282485074}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wall
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4699936327830446}
   - component: {fileID: 212773363733013906}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4030197355685324}
   - component: {fileID: 212386948119633084}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1956894061
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300032, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -222,7 +222,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1956894061
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300018, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

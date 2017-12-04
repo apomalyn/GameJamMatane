@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212108453052469900}
   - component: {fileID: 50283845141222876}
   - component: {fileID: 61295460141925150}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealFloor1
   m_TagString: HealFloor
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 344794843
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300160, guid: e92b81314e58344fd8d394e41d8277e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

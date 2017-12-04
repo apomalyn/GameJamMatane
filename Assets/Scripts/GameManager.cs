@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour{
+	
+	public static GameManager instance;
 
 	private BoardManager boardManager;
 
@@ -13,6 +15,14 @@ public class GameManager : MonoBehaviour{
 	private void Awake(){
 		boardManager = BoardManager.instance;
 		InitGame();
+	}
+
+	public void updateCamera(Vector3 position){
+		camera.transform.position = new Vector3(
+			position.x,
+			position.y,
+			-10
+		);
 	}
 
 	private void InitGame(){

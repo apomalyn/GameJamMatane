@@ -66,10 +66,13 @@ public class BoardManager : MonoBehaviour{
         SetTilesValuesForCorridors();
 
         InstantiateTiles();
-        InstantiateEnemy();
+        //InstantiateEnemy();
 
-        GameObject.Find("Main Camera").transform.position = player.transform.position;
-        //GameObject.Find("Main Camera").GetComponent<CameraController>().setOffset();
+        GameObject.Find("Main Camera").transform.position = new Vector3(
+            player.transform.position.x,
+            player.transform.position.y,
+            -10
+        );
     }
 
 
