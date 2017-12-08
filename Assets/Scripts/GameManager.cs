@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour{
 	private CharacterController playerScript;
 
 	private int levelCurrent = 0;
+
+	public bool debug = false;
 	
 	private void Awake(){
 		instance = this;
@@ -33,7 +35,12 @@ public class GameManager : MonoBehaviour{
 	}
 
 	public void loadLevel(){
-		boardManager.nextLevel();
+		if (debug){
+			boardManager.generateLevelTest(25, 25, 25, 25);
+		}
+		else{
+			boardManager.nextLevel();			
+		}
 	}
 
 	public void nextTurn(){

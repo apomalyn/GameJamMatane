@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour{
     
     private const int STAIR_HEIGHT = 3;
     private const int STAIR_WIDTH = 2;
-    private const int SPAWN_RATE_TILE_SPE = 10;
+    private const int SPAWN_RATE_TILE_SPE = 25;
     public int spawnRatePowerUp = 2;
 
 
@@ -67,12 +67,42 @@ public class BoardManager : MonoBehaviour{
 
         InstantiateTiles();
         InstantiateEnemy();
+        
+        
 
-        GameObject.Find("Main Camera").transform.position = new Vector3(
-            player.transform.position.x,
-            player.transform.position.y,
-            -10
-        );
+        GameManager.instance.updateCamera(player.transform.position);
+    }
+
+    public void generateLevelTest(int x, int y, int width, int height){
+        player = GameObject.Find("Character");
+        
+        boardHolder = new GameObject("BoardHolder");
+        enemiesHolder = new GameObject("EnemisHolder");
+
+        SetupTilesArray();
+       
+
+        for (int i = x; i < x + width; i++){
+            for (int j = y; j < y + height; j++){
+                tiles[i][j] = TileType.Floor;
+            }
+        }
+        
+        InstantiateTiles();
+        //InstantiateEnemy();
+        
+        
+        
+        Vector3 playerPos = new Vector3(x * sizeTile, y * sizeTile, 0);
+        player.transform.position = playerPos;
+        GameManager.instance.getScriptPlayer().setPosition(new Tile(x, y));
+        GameManager.instance.updateCamera(player.transform.position);
+        
+
+        /*Vector3 enemyPos = new Vector3((xCoordPlayer + 2) * sizeTile, yCoordPlayer * sizeTile, 0);
+        GameObject enemy = Instantiate(enemies[1], enemyPos, Quaternion.identity);
+        enemy.transform.parent = enemiesHolder.transform;
+        enemy.GetComponent<EnnemyController>().setPosition(new Tile(xCoordPlayer + 2, yCoordPlayer + 2));*/
     }
 
 
@@ -336,7 +366,7 @@ public class BoardManager : MonoBehaviour{
         GameObject tileInstance;
 
         if (tileSpe < spawnRatePowerUp){
-            position = new Vector3(xCoord * sizeTile, yCoord * sizeTile + 0.115f, 0f);
+            position = new Vector3(xCoord * sizeTile, yCoord * sizeTile + 0.01480f, 0f);
             randomIndex = Random.Range(0, powerUpTilesTop.Length);
             tileInstance = Instantiate(powerUpTilesTop[randomIndex], position, Quaternion.identity);
             tileInstance.transform.parent = boardHolder.transform;

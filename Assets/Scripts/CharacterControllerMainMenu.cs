@@ -42,28 +42,28 @@ public class CharacterControllerMainMenu : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
 			{
-				character_body.transform.Translate(0.005f, 0.005f, 0);
+				character_body.transform.Translate(0.01f, 0.01f, 0);
 			}
 			else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
 			{
-				character_body.transform.Translate(-0.005f, 0.005f, 0);
+				character_body.transform.Translate(-0.01f, 0.01f, 0);
 			}
 			else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
 			{
-				character_body.transform.Translate(0.005f, -0.005f, 0);
+				character_body.transform.Translate(0.01f, -0.01f, 0);
 			}
 			else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
 			{
-				character_body.transform.Translate(-0.005f, -0.005f, 0);
+				character_body.transform.Translate(-0.01f, -0.01f, 0);
 			}
 			else if (Input.GetKey(KeyCode.UpArrow))
 			{
 				//move vers le haut
-				character_body.transform.Translate(0, 0.005f, 0);
+				character_body.transform.Translate(0, 0.01f, 0);
 			}
 			else if (Input.GetKey(KeyCode.DownArrow))
 			{
-				character_body.transform.Translate(0, -0.005f, 0);
+				character_body.transform.Translate(0, -0.01f, 0);
 				//move vers le bas
 			}
 			else if (Input.GetKey(KeyCode.RightArrow))
@@ -72,7 +72,7 @@ public class CharacterControllerMainMenu : MonoBehaviour
 				{
 					flip();
 				}
-				character_body.transform.Translate(0.005f, 0, 0);
+				character_body.transform.Translate(0.01f, 0, 0);
 				//move vers la droite
 			}
 			else if (Input.GetKey(KeyCode.LeftArrow))
@@ -81,7 +81,7 @@ public class CharacterControllerMainMenu : MonoBehaviour
 				{
 					flip();
 				}
-				character_body.transform.Translate(-0.005f, 0, 0);
+				character_body.transform.Translate(-0.01f, 0, 0);
 				//move vers la gauche
 			}
 			else if (Input.GetKeyDown(KeyCode.Space))

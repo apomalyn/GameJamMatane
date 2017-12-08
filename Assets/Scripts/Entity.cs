@@ -1,7 +1,4 @@
-﻿
-using Microsoft.Win32.SafeHandles;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public abstract class Entity : MonoBehaviour{
